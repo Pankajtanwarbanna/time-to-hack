@@ -3,7 +3,7 @@
     "name": "Time to Hack: smart password strength & crack time analyzer",
     "author": "Pankaj Tanwar",
     "version": "0.0.1",
-    "description": "Shows you real-time crack time estimates for your passwords, helping you understand their true strength based on real-world attack scenarios.",
+    "description": "See real-time crack time estimates for any password you type — based on real-world attacks, not outdated security rules.",
     "content_scripts": [
         {
             "js": [
@@ -46,6 +46,7 @@
         }
     },
     "permissions": [
+        "activeTab",
         "storage"
     ]
 }
