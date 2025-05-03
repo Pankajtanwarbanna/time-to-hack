@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Time To Hack</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --red: #c62828;
+            --orange: #e65100;
+            --yellow: #f57f17;
+            --green: #2e7d32;
+            --blue: #0d47a1;
+            --background: #ffffff;
+            --surface: #ffffff;
+            --text: #1a1f36;
+            --text-secondary: #64748b;
+            --border: #e6e8eb;
+            --border-radius: 8px;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --transition: all 0.2s ease;
+            --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 340px;
+            font-family: var(--font);
+            background: var(--background);
+            color: var(--text);
+            padding: 0;
+            line-height: 1.5;
+        }
+
+        .header {
+            padding: 20px 24px 16px;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            position: relative;
+        }
+
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, var(--red), var(--orange), var(--yellow), var(--green), var(--blue));
+        }
+
+        h2 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+        }
+
+        h2::before {
+            content: "";
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-1 6h2v2h-2V7zm0 4h2v6h-2v-6z' fill='%230d47a1'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .container {
+            padding: 20px 24px;
+            background: var(--surface);
+        }
+
+        .option-group {
+            margin-bottom: 20px;
+        }
+
+        .option-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .option-label {
+            display: block;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 12px;
+        }
+
+        .select-wrapper {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .select-wrapper::after {
+            content: "▾";
+            font-size: 12px;
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            pointer-events: none;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px 16px;
+            font-size: 15px;
+            border: 1px solid var(--border);
+            border-radius: var(--border-radius);
+            background-color: var(--surface);
+            color: var(--text);
+            appearance: none;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+
+        select:focus {
+            outline: none;
+            border-color: var(--blue);
+            box-shadow: 0 0 0 3px rgba(13, 71, 161, 0.1);
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            padding: 12px;
+            background-color: #fafafa;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--blue);
+        }
+
+        .toggle-label {
+            font-size: 15px;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .toggle {
+            position: relative;
+            display: inline-block;
+            width: 46px;
+            height: 24px;
+        }
+
+        .toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #e0e0e0;
+            transition: var(--transition);
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: var(--transition);
+            border-radius: 50%;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        input:checked+.slider {
+            background-color: var(--blue);
+        }
+
+        input:focus+.slider {
+            box-shadow: 0 0 0 3px rgba(13, 71, 161, 0.1);
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(22px);
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: var(--blue);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn:hover {
+            background: #1565c0;
+            transform: translateY(-1px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        #status {
+            margin-top: 16px;
+            padding: 12px;
+            border-radius: var(--border-radius);
+            background-color: #e8f5e9;
+            color: var(--green);
+            text-align: center;
+            font-weight: 500;
+            opacity: 0;
+            transform: translateY(5px);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border-left: 4px solid var(--green);
+        }
+
+        #status.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .success-icon {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h2>Time To Hack</h2>
+        <div class="subtitle">Configure how password strength is displayed</div>
+    </div>
+
+    <div class="container">
+        <div class="option-group">
+            <label class="option-label">Attack scenario</label>
+            <div class="select-wrapper">
+                <select id="attackScenario">
+                    <option value="online">Online Attack (100/hour)</option>
+                    <option value="offline_fast">Offline Fast Hashing (10B/second)</option>
+                    <option value="offline_slow" selected>Offline Slow Hashing (10K/second)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="option-group">
+            <div class="toggle-container">
+                <span class="toggle-label">Show password suggestions</span>
+                <label class="toggle">
+                    <input type="checkbox" id="showSuggestions" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="toggle-container">
+                <span class="toggle-label">Show strength progress bar</span>
+                <label class="toggle">
+                    <input type="checkbox" id="showProgressBar" checked>
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+
+        <button id="save" class="btn">Save Changes</button>
+        <div id="status">
+            <svg class="success-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"
+                fill="#2e7d32">
+                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"></path>
+            </svg>
+            Settings saved successfully!
+        </div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+{
+    "manifest_version": 3,
+    "name": "Time to Hack: smart password strength & crack time analyzer",
+    "author": "Pankaj Tanwar",
+    "version": "0.0.1",
+    "description": "Shows you real-time crack time estimates for your passwords, helping you understand their true strength based on real-world attack scenarios.",
+    "content_scripts": [
+        {
+            "js": [
+                "lib/zxcvbn.min.js",
+                "content.js"
+            ],
+            "matches": [
+                "<all_urls>"
+            ],
+            "css": [
+                "style.css"
+            ]
+        }
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "lib/*",
+                "icons/*"
+            ],
+            "matches": [
+                "<all_urls>"
+            ]
+        }
+    ],
+    "icons": {
+        "16": "images/icon.png",
+        "32": "images/icon.png",
+        "48": "images/icon.png",
+        "128": "images/icon.png"
+    },
+    "action": {
+        "default_popup": "popup.html",
+        "default_title": "Time to Hack",
+        "default_icon": {
+            "16": "images/icon.png",
+            "32": "images/icon.png",
+            "48": "images/icon.png",
+            "128": "images/icon.png"
+        }
+    },
+    "permissions": [
+        "storage"
+    ]
+}

@@ -1,0 +1,290 @@
+.password-hack-time-container {
+    margin-top: 12px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    max-width: 100%;
+    width: 100%;
+    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+    z-index: 100;
+    position: relative;
+    clear: both;
+    display: block;
+}
+
+.password-hack-time {
+    font-size: 14px;
+    font-weight: 600;
+    padding: 12px 16px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transform: translateY(0);
+    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.password-hack-time.score-0::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.1);
+    animation: pulse 2s infinite;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Add custom icons before text */
+.password-hack-time::before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    margin-right: 10px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    vertical-align: middle;
+    position: relative;
+    z-index: 2;
+}
+
+.password-hack-time.score-0::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23c62828'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z'/%3E%3C/svg%3E");
+}
+
+.password-hack-time.score-1::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ef6c00'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z'/%3E%3C/svg%3E");
+}
+
+.password-hack-time.score-2::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f9a825'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14h2v2h-2v-2zm0-2h2V7h-2v7z'/%3E%3C/svg%3E");
+}
+
+.password-hack-time.score-3::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232e7d32'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z'/%3E%3C/svg%3E");
+}
+
+.password-hack-time.score-4::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231565c0'%3E%3Cpath d='M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z'/%3E%3C/svg%3E");
+}
+
+.password-suggestions {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.5;
+    padding: 14px 18px;
+    border-radius: 8px;
+    display: block;
+    list-style-type: none;
+    margin: 0 0 10px 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+    transform: translateY(0);
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.password-suggestions li {
+    margin-bottom: 8px;
+    position: relative;
+    padding-left: 24px;
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+    animation-delay: calc(0.1s * var(--i, 0));
+}
+
+.password-suggestions li:last-child {
+    margin-bottom: 0;
+}
+
+.password-suggestions li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 3px;
+    width: 16px;
+    height: 16px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor'%3E%3Cpath d='M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6A4.997 4.997 0 0 1 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.16-2.15 4.1z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+/* Score-specific styles */
+.password-hack-time.score-0 {
+    background-color: #ffebee;
+    color: #c62828;
+    border-left: 4px solid #c62828;
+}
+
+.password-hack-time.score-1 {
+    background-color: #fff3e0;
+    color: #e65100;
+    border-left: 4px solid #e65100;
+}
+
+.password-hack-time.score-2 {
+    background-color: #fffde7;
+    color: #f57f17;
+    border-left: 4px solid #f57f17;
+}
+
+.password-hack-time.score-3 {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border-left: 4px solid #2e7d32;
+}
+
+.password-hack-time.score-4 {
+    background-color: #e3f2fd;
+    color: #0d47a1;
+    border-left: 4px solid #0d47a1;
+}
+
+.password-suggestions.score-0,
+.password-suggestions.score-1 {
+    background-color: #ffebee;
+    color: #c62828;
+    border-left: 4px solid #c62828;
+}
+
+.password-suggestions.score-2 {
+    background-color: #fffde7;
+    color: #f57f17;
+    border-left: 4px solid #f57f17;
+}
+
+.password-suggestions.score-3,
+.password-suggestions.score-4 {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border-left: 4px solid #2e7d32;
+}
+
+/* Progress bar */
+.password-progress-bar {
+    height: 6px;
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 3px;
+    margin-top: 4px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.password-progress-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.password-progress-bar-fill::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.3) 50%,
+            rgba(255, 255, 255, 0) 100%);
+    transform: translateX(-100%);
+    animation: shimmer 2s infinite;
+}
+
+.password-progress-bar-fill.score-0 {
+    width: 20%;
+    background-color: #c62828;
+}
+
+.password-progress-bar-fill.score-1 {
+    width: 40%;
+    background-color: #e65100;
+}
+
+.password-progress-bar-fill.score-2 {
+    width: 60%;
+    background-color: #f57f17;
+}
+
+.password-progress-bar-fill.score-3 {
+    width: 80%;
+    background-color: #2e7d32;
+}
+
+.password-progress-bar-fill.score-4 {
+    width: 100%;
+    background-color: #0d47a1;
+}
+
+/* Animations */
+@keyframes pulse {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Password input field wrapper - key for positioning */
+.pw-strength-wrapper {
+    position: relative;
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+/* Mobile responsiveness */
+@media screen and (max-width: 480px) {
+    .password-hack-time-container {
+        max-width: 100%;
+    }
+
+    .password-hack-time {
+        font-size: 13px;
+        padding: 10px 14px;
+    }
+
+    .password-suggestions {
+        font-size: 12px;
+        padding: 12px 16px;
+    }
+}
